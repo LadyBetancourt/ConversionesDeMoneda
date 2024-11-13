@@ -1,4 +1,6 @@
-﻿namespace ConversionesDeMoneda
+﻿using System.Threading.Channels;
+
+namespace ConversionesDeMoneda
 {
     internal class Program
     {
@@ -8,10 +10,12 @@
             {
             MostrarMenu();
 
-                switch (Console.ReadLine().ToString())
+                string respuestaUsuario = Console.ReadLine();
+
+                switch (respuestaUsuario)
                 {
                     case "1":
-                        Console.WriteLine("Pesos a Dolares");
+                        ConvertirPesosADolares();
                         break;
                     case "2":
                         Console.WriteLine("Dolares a pesos");
@@ -36,7 +40,22 @@
             Console.WriteLine("2) Dolares a pesos");
             Console.WriteLine("");
         }
+        static void ConvertirPesosADolares() 
+        {
+            Console.WriteLine("Pesos a Dolares");
+            Console.WriteLine("Introducir tipo de cambio");
 
+            string respuestaUsuario = Console.ReadLine();
+            decimal.TryParse(respuestaUsuario, out decimal tipoDeCambio);
+
+
+            Console.WriteLine("Introduir la cantidad en pesos");
+            respuestaUsuario = Console.ReadLine();
+            decimal.TryParse(respuestaUsuario, out decimal pesos);
+
+            decimal dolares = PesosADolares(tipoDeCambio, pesos);
+            Console.WriteLine($"Cantidad en Dolares:{dolares}");
+        }
         static decimal PesosADolares(decimal tipoCambio, decimal pesos)
         {
             decimal dolares = 0.00m;
