@@ -1,14 +1,12 @@
-﻿using System.Threading.Channels;
-
-namespace ConversionesDeMoneda
+﻿namespace ConversionesDeMoneda
 {
     internal class Program
     {
         static void Main(string[] args)
         {
-            while (true) 
+            while (true)
             {
-            MostrarMenu();
+                MostrarMenu();
 
                 string respuestaUsuario = Console.ReadLine();
 
@@ -18,18 +16,15 @@ namespace ConversionesDeMoneda
                         ConvertirPesosADolares();
                         break;
                     case "2":
-                        Console.WriteLine("Dolares a pesos");
+                        ConvertirDolaresAPesos();
                         break;
                     default:
                         Console.WriteLine("Opción incorrecta");
                         break;
+                }
+                Console.ReadKey();
+
             }
-                Console.ReadKey();  
-
-        }
-
-            //decimal conversion = PesosADolares(20.43m, 50000m);
-            //Console.WriteLine(conversion.ToString("N2"));
         }
 
         static void MostrarMenu()
@@ -40,7 +35,7 @@ namespace ConversionesDeMoneda
             Console.WriteLine("2) Dolares a pesos");
             Console.WriteLine("");
         }
-        static void ConvertirPesosADolares() 
+        static void ConvertirPesosADolares()
         {
             Console.WriteLine("Pesos a Dolares");
             Console.WriteLine("Introducir tipo de cambio");
@@ -54,13 +49,36 @@ namespace ConversionesDeMoneda
             decimal.TryParse(respuestaUsuario, out decimal pesos);
 
             decimal dolares = PesosADolares(tipoDeCambio, pesos);
-            Console.WriteLine($"Cantidad en Dolares:{dolares}");
+            Console.WriteLine($"Cantidad en Dolares:{dolares.ToString("N2")}");
+        }
+        static void ConvertirDolaresAPesos()
+        {
+            Console.WriteLine("Dolares a pesos");
+            Console.WriteLine("Introducir tipo de cambio");
+
+            string respuestaUsuario = Console.ReadLine();
+            decimal.TryParse(respuestaUsuario, out decimal tipoCambio);
+
+            Console.WriteLine("Introducir la cantidad en dolares");
+            respuestaUsuario = Console.ReadLine();
+
+            decimal.TryParse(respuestaUsuario, out decimal dolares);
+
+            decimal pesos = DolaresAPesos(tipoCambio, dolares);
+            Console.WriteLine($"La cantidad en pesos es: {pesos.ToString("N2")}");
         }
         static decimal PesosADolares(decimal tipoCambio, decimal pesos)
         {
             decimal dolares = 0.00m;
             dolares = pesos / tipoCambio;
             return dolares;
+        }
+
+        static decimal DolaresAPesos(decimal tipoCambio, decimal dolares)
+        {
+            decimal pesos = 0.00m;
+            pesos = tipoCambio * dolares;
+            return pesos;
         }
     }
 }
