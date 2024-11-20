@@ -2,10 +2,16 @@
 {
     internal class Program
     {
+
+        //Este es el metodo principal
         static void Main(string[] args)
         {
+
+            //Creamos un ciclo infinito
             while (true)
             {
+
+                //Llamamos al metodo MostrarMenu
                 MostrarMenu();
 
                 string respuestaUsuario = Console.ReadLine();
@@ -27,6 +33,7 @@
             }
         }
 
+        //Este es un metodo que me imprime las opciones para el usuario
         static void MostrarMenu()
         {
             Console.Clear();
