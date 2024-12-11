@@ -24,6 +24,9 @@
                     case "2":
                         ConvertirDolaresAPesos();
                         break;
+                    case "3":
+                        ConvertirPesosAEuros();
+                        break;
                     default:
                         Console.WriteLine("Opción incorrecta");
                         break;
@@ -40,6 +43,7 @@
             Console.WriteLine("Conversiones");
             Console.WriteLine("1) Pesos a Dolares");
             Console.WriteLine("2) Dolares a pesos");
+            Console.WriteLine("3) Pesos a Euros");
             Console.WriteLine("");
         }
         static void ConvertirPesosADolares()
@@ -85,6 +89,49 @@
         {
             decimal pesos = 0.00m;
             pesos = tipoCambio * dolares;
+            return pesos;
+        }
+        static void ConvertirPesosAEuros()
+        {
+            Console.WriteLine("Pesos a Euros");
+            Console.WriteLine("Introducir tipo de cambio");
+
+            string respuestaUsuario = Console.ReadLine();
+            decimal.TryParse(respuestaUsuario, out decimal tipoCambio);
+
+            Console.WriteLine("Introducir la cantidad en pesos");
+            respuestaUsuario = Console.ReadLine();
+            decimal.TryParse(respuestaUsuario, out decimal pesos);
+
+            decimal Euros = PesosAEuros(tipoCambio, pesos);
+            Console.WriteLine($"Cantidad en Euros: {Euros.ToString("N2")}");
+        }
+        static void ConvertirEurosAPesos()
+        {
+            Console.WriteLine("Euros a pesos");
+            Console.WriteLine("Introducir tipo de cambio");
+
+            string respuestaUsuario = Console.ReadLine();
+            decimal.TryParse(respuestaUsuario, out decimal tipoCambio);
+
+            Console.WriteLine("Introducir la cantidad en euros");
+            respuestaUsuario= Console.ReadLine();
+
+            decimal.TryParse(respuestaUsuario, out decimal euros);
+
+            decimal pesos = EurosAPesos(tipoCambio, euros);
+            Console.WriteLine($"La cantidad en pesos es: {pesos.ToString("N2")}");
+        }
+        static decimal PesosAEuros(decimal tipoCambio, decimal pesos) 
+        {
+            decimal euros = 0.00m;
+            euros = pesos / tipoCambio;
+            return euros;
+        }
+        static decimal EurosAPesos(decimal tipoCambio, decimal euros) 
+        {
+            decimal pesos = 0.00m;
+            pesos = euros / tipoCambio;
             return pesos;
         }
     }
